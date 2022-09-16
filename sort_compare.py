@@ -1,6 +1,4 @@
-import argparse
-# other imports go here
-
+import time
 import random
 import time
 
@@ -27,18 +25,16 @@ def insertion_sort(a_list):
         a_list[position] = current_value
 
 
-def shellSort(alist):
+def shell_sort(alist):
     sublistcount = len(alist)//2
     while sublistcount > 0:
         for startposition in range(sublistcount):
-            gapInsertionSort(alist,startposition,sublistcount)
-
-        print("After increments of size", sublistcount, "The list is",alist)
+            gap_insertion_sort(alist,startposition,sublistcount)
 
         sublistcount = sublistcount // 2
 
 
-def gapInsertionSort(alist, start, gap):
+def gap_insertion_sort(alist, start, gap):
 
     for i in range(start+gap, len(alist), gap):
         currentvalue = alist[i]
@@ -65,29 +61,41 @@ if __name__ == "__main__":
     """Main entry point"""
     list_sizes = [500, 1000, 5000]
 
-    # the_size = list_sizes[0]
-
+    #python_sort loop
     for the_size in list_sizes:
         total_time = 0
         for i in range(100):
-            mylist500 = get_me_random_list(the_size)
+            mylist = get_me_random_list(the_size)
             start = time.time()
-            sorted_list = python_sort(mylist500)
+            sorted_list = python_sort(mylist)
             time_spent = time.time() - start
             total_time += time_spent
 
         avg_time = total_time / 100
         print(f"Python sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
 
+    #insertion_sort loop
+    for the_size in list_sizes:
         total_time = 0
         for i in range(100):
-            mylist500 = get_me_random_list(the_size)
+            mylist = get_me_random_list(the_size)
             start = time.time()
-            insertion_sort(mylist500)
+            sorted_list = insertion_sort(mylist)
             time_spent = time.time() - start
             total_time += time_spent
 
-        # Repeat the same loop and use shellSort(...)
-
         avg_time = total_time / 100
         print(f"Insertion sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
+
+    #shell_sort loop
+    for the_size in list_sizes:
+        total_time = 0
+        for i in range(100):
+            mylist = get_me_random_list(the_size)
+            start = time.time()
+            sorted_list = shell_sort(mylist)
+            time_spent = time.time() - start
+            total_time += time_spent
+
+        avg_time = total_time / 100
+        print(f"Shell Sort took {avg_time:10.7f} seconds to run, on average for a list of {the_size} elements")
