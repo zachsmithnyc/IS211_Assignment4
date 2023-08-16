@@ -73,6 +73,13 @@ def binary_search_recursive(a_list,item):
             else:
                 return binary_search_recursive(a_list[midpoint + 1:], item)
 
+def linear_search(list, target):
+    max_value_index = list[0]
+    for i in range(0, len(list)):
+        if list[i] > max_value_index:
+            max_value_index = i
+    return max_value_index
+
 
 if __name__ == "__main__":
     """Main entry point"""
